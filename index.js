@@ -65,12 +65,21 @@
 				(match) => {
 					const link = document.createElement("a");
 					resultsElement.appendChild(link);
-					link.innerText = pageText.substring(match.index - 25, match.index + 25);
+
+					link.innerText =
+						pageText.substring(match.index - 25, match.index) +
+						match.input +
+						pageText.substring(
+							match.index + match.input.length,
+							match.index + match.input.length + 25
+						);
+
 					Object.assign(link.style, {
 						display: "block",
 						width: "100%",
 						padding: "0.25rem",
-						borderBottom: "1px solid grey"
+						borderBottom: "1px solid grey",
+						fontSize: "0.75rem"
 					});
 				}
 			);
