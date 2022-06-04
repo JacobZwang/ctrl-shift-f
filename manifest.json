@@ -1,0 +1,18 @@
+{
+	"manifest_version": 3,
+	"name": "Cache Search",
+	"version": "0.1.0",
+	"description": "Search cached pages for text.",
+	"icons": {},
+	"content_scripts": [
+		{
+			"matches": ["*://*/*"],
+			"js": ["./index.js"],
+			"run_at": "document_end"
+		}
+	],
+	"permissions": ["storage"],
+	"action": {
+		"default_popup": "popup.html"
+	}
+}
