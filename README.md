@@ -3,6 +3,7 @@ chrome extension to full text search all pages of a website you've been to
 
 ![ctrl-shift-f demo](ctrl-shift-f-demo.png)
 
+## Hackathons
 > Bon Voyage Hacks II
 
 > LaunchHacks
