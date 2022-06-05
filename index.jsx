@@ -49,13 +49,13 @@ import ReactDOM from "react-dom";
 				<div
 					style={{
 						position: "fixed",
-						width: "20rem",
+						width: "20em",
 						backgroundColor: "white",
 						left: "50vw",
 						transform: "translateX(-50%)",
 						top: "0",
 						zIndex: "10000",
-						padding: "0.5rem",
+						padding: "0.5em",
 						boxSizing: "border-box"
 					}}
 				>
@@ -77,7 +77,7 @@ import ReactDOM from "react-dom";
 									setResults([
 										...results,
 										...Array.from(
-											cursor.value.text.matchAll(new RegExp(search, "g"))
+											cursor.value.text.matchAll(new RegExp(search, "gi"))
 										)?.map((match) => ({
 											path: cursor.value.path,
 											contextBefore: cursor.value.text.substring(
@@ -85,8 +85,8 @@ import ReactDOM from "react-dom";
 												match.index
 											),
 											contextAfter: cursor.value.text.substring(
-												match.index + search.length + 1,
-												match.index + search.length + 51
+												match.index + search.length,
+												match.index + search.length + 50
 											)
 										}))
 									]);
@@ -95,12 +95,14 @@ import ReactDOM from "react-dom";
 						}}
 						style={{
 							width: "100%",
-							boxSizing: "border-box"
+							boxSizing: "border-box",
+							backgroundColor: "transparent",
+							border: "none"
 						}}
 					/>
 					<div
 						style={{
-							maxHeight: "8rem",
+							maxHeight: "8em",
 							overflowY: "scroll"
 						}}
 					>
@@ -111,9 +113,9 @@ import ReactDOM from "react-dom";
 									textDecoration: "none",
 									display: "block",
 									width: "100%",
-									padding: "0.25rem",
+									padding: "0.25em",
 									borderBottom: "1px solid grey",
-									fontSize: "0.75rem",
+									fontSize: "0.75em",
 									color: "grey"
 								}}
 							>
