@@ -47,6 +47,7 @@ import ReactDOM from "react-dom";
 		const SearchUI = () => {
 			let [results, setResults] = React.useState([]);
 			let [open, setOpen] = React.useState(false);
+			let [activeIndex, setActiveIndex] = React.useState(0);
 
 			React.useEffect(() => {
 				let controlDown = false;
@@ -104,6 +105,9 @@ import ReactDOM from "react-dom";
 						<input
 							type="text"
 							ref={inputRef}
+							onFocus={() => {
+								setActiveIndex(0);
+							}}
 							onInput={(e) => {
 								search = e.target.value;
 								results = [];
@@ -143,6 +147,27 @@ import ReactDOM from "react-dom";
 								};
 							}}
 						/>
+						<span
+							style={{
+								color: "gray",
+								display: "inline-flex",
+								alignContent: "center"
+							}}
+						>
+							{activeIndex ? (
+								<>{activeIndex}/</>
+							) : (
+								<span
+									style={{
+										marginRight: "4px",
+										whiteSpace: "nowrap"
+									}}
+								>
+									<kbd>tab</kbd>
+								</span>
+							)}
+							{results.length}
+						</span>
 						<button
 							tabIndex={-1}
 							onClick={() => {
@@ -159,7 +184,12 @@ import ReactDOM from "react-dom";
 						}}
 					>
 						{results.map((result, i) => (
-							<a href={result.path}>
+							<a
+								href={result.path}
+								onFocus={() => {
+									setActiveIndex(i + 1);
+								}}
+							>
 								<span
 									style={{
 										display: "block",
@@ -196,6 +226,13 @@ import ReactDOM from "react-dom";
 			* {
 				box-sizing: border-box;
 				transition: background-color 0.2s ease-in-out;
+			}
+
+			kbd {
+				// background-color: #e8e8e8;
+				padding: 0 0.25em;
+				border-radius: 2pt;
+				border: 1pt solid #e8e8e8;
 			}
 
 			a {
@@ -262,12 +299,13 @@ import ReactDOM from "react-dom";
 				background-color: white;
 				display: inline-flex;
 				align-items: center;
+				gap: 0.5em;
 			}
 
 			button {
 				background-color: transparent;
-				height: 2rem;
-				width: 2rem;
+				height: 32px;
+				width: 32px;
 				border-radius: 50%;
 				display: block;
 				border: none;
