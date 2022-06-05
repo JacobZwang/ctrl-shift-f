@@ -9,7 +9,9 @@ jobs:
     runs-on: "ubuntu-latest"
 
     steps:
-      # ...
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
       - name: "Build & test"
         run: |
           npm i -g pnpm
