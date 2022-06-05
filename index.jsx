@@ -49,14 +49,16 @@ import ReactDOM from "react-dom";
 				<div
 					style={{
 						position: "fixed",
-						width: "20em",
-						backgroundColor: "white",
+						width: "30em",
 						left: "50vw",
 						transform: "translateX(-50%)",
 						top: "0",
 						zIndex: "10000",
-						padding: "0.5em",
-						boxSizing: "border-box"
+						boxSizing: "border-box",
+						borderRadius: "3pt",
+						boxShadow: "0 2px 4px 0 rgba(0,0,0,0.2)",
+						overflow: "hidden",
+						backgroundColor: "#f7f7f7"
 					}}
 				>
 					<input
@@ -96,8 +98,12 @@ import ReactDOM from "react-dom";
 						style={{
 							width: "100%",
 							boxSizing: "border-box",
-							backgroundColor: "transparent",
-							border: "none"
+							backgroundColor: "white",
+							border: "none",
+							outline: "none",
+							lineHeight: "1",
+							padding: "1.15em",
+							borderRadius: "3pt"
 						}}
 					/>
 					<div
@@ -113,10 +119,13 @@ import ReactDOM from "react-dom";
 									textDecoration: "none",
 									display: "block",
 									width: "100%",
-									padding: "0.25em",
+									padding: "0.5em",
 									borderBottom: "1px solid grey",
 									fontSize: "0.75em",
-									color: "grey"
+									color: "grey",
+									boxSizing: "border-box",
+									paddingRight: "1.15em",
+									paddingLeft: "1.15em"
 								}}
 							>
 								<span
