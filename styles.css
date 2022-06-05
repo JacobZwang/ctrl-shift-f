@@ -1,0 +1,62 @@
+:root {
+	--gray: rgb(85, 85, 85);
+}
+
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: var(--gray);
+	background-color: #fff;
+	text-align: center;
+	height: 100vh;
+	overflow: hidden;
+}
+
+.container {
+	display: flex;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	place-items: center;
+	flex-direction: column;
+	justify-content: center;
+}
+
+h1 {
+	font-weight: normal;
+	margin: 0;
+	display: flex;
+	width: 100%;
+	align-items: center;
+	gap: 0.5em;
+	justify-content: center;
+}
+
+p {
+	margin: 0;
+}
+
+kbd {
+	font-family: inherit;
+	color: black;
+	font-weight: bold;
+}
+
+.vl {
+	border-left: 1px solid var(--gray);
+	height: 100%;
+	margin: 0 0.5em;
+}
+
+menu {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	padding: 0;
+}
