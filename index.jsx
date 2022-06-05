@@ -116,6 +116,7 @@ import ReactDOM from "react-dom";
 									const store = transaction.objectStore("pages");
 									store.openCursor().onsuccess = (event) => {
 										const cursor = event.target.result;
+										if (!cursor) return;
 
 										results = [
 											...results,
@@ -224,7 +225,7 @@ import ReactDOM from "react-dom";
 				box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 				overflow: hidden;
 				background-color: #f7f7f7;
-				transition: top 0.2s ease-in-out;
+				transition: top 0.1s ease-in-out;
 			}
 
 			#results {
