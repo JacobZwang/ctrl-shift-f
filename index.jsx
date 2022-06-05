@@ -16,7 +16,7 @@ import ReactDOM from "react-dom";
 		req.onupgradeneeded = (event) => {
 			const db = event.target.result;
 			const store = db.createObjectStore("pages", { keyPath: "path" });
-			store.add({
+			store.put({
 				path: pagePath,
 				text: pageText
 			});
@@ -26,7 +26,7 @@ import ReactDOM from "react-dom";
 			const db = event.target.result;
 			const transaction = db.transaction(["pages"], "readwrite");
 			const store = transaction.objectStore("pages");
-			store.add({
+			store.put({
 				path: pagePath,
 				text: pageText
 			});
