@@ -44,7 +44,41 @@ import ReactDOM from "react-dom";
 
 		const SearchUI = () => {
 			let [results, setResults] = React.useState([]);
-			let [open, setOpen] = React.useState(true);
+			let [open, setOpen] = React.useState(false);
+
+			React.useEffect(() => {
+				let controlDown = false;
+				let shiftDown = false;
+
+				function handleKeyDown(e) {
+					if (e.key === "Meta" || e.key === "Control") {
+						controlDown = true;
+					} else if (e.key === "Shift") {
+						shiftDown = true;
+					} else if (e.key === "f") {
+						if (controlDown && shiftDown) {
+							setOpen(true);
+						}
+					} else if (e.key === "Escape") {
+						setOpen(false);
+					}
+				}
+				window.addEventListener("keydown", handleKeyDown);
+
+				function handleKeyUp(e) {
+					if (e.key === "Meta" || e.key === "Control") {
+						controlDown = false;
+					} else if (e.key === "Shift") {
+						shiftDown = false;
+					}
+				}
+				window.addEventListener("keyup", handleKeyUp);
+
+				return () => {
+					window.removeEventListener("keydown", handleKeyDown);
+					window.removeEventListener("keyup", handleKeyDown);
+				};
+			}, []);
 
 			return (
 				<div
