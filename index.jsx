@@ -8,25 +8,28 @@ import ReactDOM from "react-dom";
 	const pagePath = document.location.pathname;
 	const pageText = document.body.innerText.replace(/\s+/g, " ").trim();
 
-	const req = window.indexedDB.open("cache-search", 3);
-	req.onupgradeneeded = (event) => {
-		const db = event.target.result;
-		const store = db.createObjectStore("pages", { keyPath: "path" });
-		store.add({
-			path: pagePath,
-			text: pageText
-		});
-	};
+	// add current page to store
+	(function () {
+		const req = window.indexedDB.open("cache-search", 3);
+		req.onupgradeneeded = (event) => {
+			const db = event.target.result;
+			const store = db.createObjectStore("pages", { keyPath: "path" });
+			store.add({
+				path: pagePath,
+				text: pageText
+			});
+		};
 
-	req.onsuccess = (event) => {
-		const db = event.target.result;
-		const transaction = db.transaction(["pages"], "readwrite");
-		const store = transaction.objectStore("pages");
-		store.add({
-			path: pagePath,
-			text: pageText
-		});
-	};
+		req.onsuccess = (event) => {
+			const db = event.target.result;
+			const transaction = db.transaction(["pages"], "readwrite");
+			const store = transaction.objectStore("pages");
+			store.add({
+				path: pagePath,
+				text: pageText
+			});
+		};
+	})();
 
 	// ui for search input and results
 	(function () {
@@ -37,8 +40,10 @@ import ReactDOM from "react-dom";
 		let root = document.createElement("div");
 		shadow.appendChild(root);
 
+		let search = "";
+
 		const SearchUI = () => {
-			const [search, setSearch] = React.useState("");
+			let [results, setResults] = React.useState([]);
 
 			return (
 				<div
@@ -55,7 +60,38 @@ import ReactDOM from "react-dom";
 					}}
 				>
 					<input
-						onInput={(e) => setSearch(e.target.value)}
+						onInput={(e) => {
+							search = e.target.value;
+							if (search.length < 1) return;
+
+							const req = window.indexedDB.open("cache-search", 3);
+							req.onsuccess = (event) => {
+								const db = event.target.result;
+								const transaction = db.transaction(["pages"], "readwrite");
+								const store = transaction.objectStore("pages");
+								results = [];
+								setResults([]);
+								store.openCursor().onsuccess = (event) => {
+									const cursor = event.target.result;
+									setResults([
+										...results,
+										...Array.from(
+											cursor.value.text.matchAll(new RegExp(search, "g"))
+										)?.map((match) => ({
+											path: cursor.value.path,
+											contextBefore: cursor.value.text.substring(
+												match.index - 50,
+												match.index
+											),
+											contextAfter: cursor.value.text.substring(
+												match.index + search.length + 1,
+												match.index + search.length + 51
+											)
+										}))
+									]);
+								};
+							};
+						}}
 						style={{
 							width: "100%",
 							boxSizing: "border-box"
@@ -67,9 +103,11 @@ import ReactDOM from "react-dom";
 							overflowY: "scroll"
 						}}
 					>
-						{Array.from(pageText.matchAll(new RegExp(search, "g"))).map((result) => (
+						{results.map((result) => (
 							<a
+								href={result.path}
 								style={{
+									textDecoration: "none",
 									display: "block",
 									width: "100%",
 									padding: "0.25rem",
@@ -78,12 +116,19 @@ import ReactDOM from "react-dom";
 									color: "grey"
 								}}
 							>
-								{pageText.substring(result.index - 50, result.index)}
+								<span
+									style={{
+										display: "block",
+										color: "blue",
+										textDecoration: "underline"
+									}}
+								>
+									<span style={{ opacity: 0.25 }}>{window.origin}</span>
+									{result.path}
+								</span>
+								{result.contextBefore}
 								<span style={{ color: "black", fontWeight: "bold" }}>{search}</span>
-								{pageText.substring(
-									result.index + search.length,
-									result.index + search.length + 50
-								)}
+								{result.contextAfter}
 							</a>
 						))}
 					</div>
