@@ -5,7 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"build": "node ./esbuild.js",
-		"build:pages": "node ./esbuild.js && cp ./index.js ./gh-pages/index.js"
+		"build:pages": "node ./esbuild.js && cp ./index.js ./gh-pages/ctrl-shift-f-demo.js",
+		"start:pages": "npx http-server ./gh-pages"
 	},
 	"keywords": [],
 	"author": "",

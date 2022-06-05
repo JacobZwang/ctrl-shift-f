@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 (async function () {
+	if (document.querySelector("[src='./ctrl-shift-f-demo.js']")) return;
+
 	const pageSearchParams = Object.fromEntries(
 		new URLSearchParams(document.location.search).entries()
 	);
