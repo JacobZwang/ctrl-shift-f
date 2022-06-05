@@ -2,29 +2,31 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 (async function () {
-	// retrieve all cache from storage
-	const cache = await new Promise((resolve, reject) => {
-		/* Cache from all pages is compressed together for smallest total size.
-        It is equally split across all keys to avoid max key size limitation. */
-
-		chrome.storage.sync.get(null, (items) => {
-			// this is how documentation says to detect errors
-			// https://developer.chrome.com/docs/extensions/reference/storage/#asynchronous-preload-from-storage
-			if (chrome.runtime.lastError) {
-				throw new Error("could not cache page", {
-					cause: chrome.runtime.lastError
-				});
-			}
-
-			resolve(Object.values(items).join(""));
-		});
-	}).then((data) => JSON.parse(data || "{}")); // TODO: un-compress data
-
 	const pageSearchParams = Object.fromEntries(
 		new URLSearchParams(document.location.search).entries()
 	);
 	const pagePath = document.location.pathname;
 	const pageText = document.body.innerText.replace(/\s+/g, " ").trim();
+
+	const req = window.indexedDB.open("cache-search", 3);
+	req.onupgradeneeded = (event) => {
+		const db = event.target.result;
+		const store = db.createObjectStore("pages", { keyPath: "path" });
+		store.add({
+			path: pagePath,
+			text: pageText
+		});
+	};
+
+	req.onsuccess = (event) => {
+		const db = event.target.result;
+		const transaction = db.transaction(["pages"], "readwrite");
+		const store = transaction.objectStore("pages");
+		store.add({
+			path: pagePath,
+			text: pageText
+		});
+	};
 
 	// ui for search input and results
 	(function () {
