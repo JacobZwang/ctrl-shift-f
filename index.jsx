@@ -105,8 +105,9 @@ import ReactDOM from "react-dom";
 						<input
 							type="text"
 							ref={inputRef}
-							onFocus={() => {
+							onFocus={(e) => {
 								setActiveIndex(0);
+								e.target.select();
 							}}
 							onInput={(e) => {
 								search = e.target.value;
@@ -168,14 +169,16 @@ import ReactDOM from "react-dom";
 							)}
 							{results.length}
 						</span>
-						<button
-							tabIndex={-1}
-							onClick={() => {
-								setOpen(false);
-							}}
-						>
-							✕
-						</button>
+						<span>
+							<button
+								tabIndex={-1}
+								onClick={() => {
+									setOpen(false);
+								}}
+							>
+								✕
+							</button>
+						</span>
 					</div>
 					<div
 						id="results"
