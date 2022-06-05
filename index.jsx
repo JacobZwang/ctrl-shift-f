@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 (async function () {
-	if (document.querySelector("[src='./ctrl-shift-f-demo.js']")) return;
+	// if (document.querySelector("[src='./ctrl-shift-f-demo.js']")) return;
 
 	const pageSearchParams = Object.fromEntries(
 		new URLSearchParams(document.location.search).entries()
@@ -102,6 +102,7 @@ import ReactDOM from "react-dom";
 				>
 					<div id="controller">
 						<input
+							type="text"
 							ref={inputRef}
 							onInput={(e) => {
 								search = e.target.value;
@@ -143,6 +144,7 @@ import ReactDOM from "react-dom";
 							}}
 						/>
 						<button
+							tabIndex={-1}
 							onClick={() => {
 								setOpen(false);
 							}}
@@ -173,6 +175,13 @@ import ReactDOM from "react-dom";
 								{result.contextAfter}
 							</a>
 						))}
+						<a
+							href="/"
+							style={{ height: 0, padding: 0 }}
+							onFocus={() => {
+								setInputFocus();
+							}}
+						></a>
 					</div>
 				</div>
 			);
@@ -268,7 +277,8 @@ import ReactDOM from "react-dom";
 				margin-right: 0.5rem;
 			}
 
-			button:hover {
+			button:hover,
+			button:focus {
 				background-color: #e8e8e8;
 			}
 		`;
