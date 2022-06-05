@@ -7,6 +7,10 @@
 	"content_scripts": [
 		{
 			"matches": ["*://*/*"],
+			"exclude_matches": [
+				"http://localhost:8080/*",
+				"https://jacobzwang.github.io/ctrl-shift-f/*"
+			],
 			"js": ["./index.js"],
 			"run_at": "document_end"
 		}
