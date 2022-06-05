@@ -46,22 +46,7 @@ import ReactDOM from "react-dom";
 			let [results, setResults] = React.useState([]);
 
 			return (
-				<div
-					style={{
-						fontSize: "14px",
-						position: "fixed",
-						width: "30em",
-						left: "50vw",
-						transform: "translateX(-50%)",
-						top: "0",
-						zIndex: "10000",
-						boxSizing: "border-box",
-						borderRadius: "3pt",
-						boxShadow: "0 2px 4px 0 rgba(0,0,0,0.2)",
-						overflow: "hidden",
-						backgroundColor: "#f7f7f7"
-					}}
-				>
+				<div id="container">
 					<input
 						onInput={(e) => {
 							search = e.target.value;
@@ -100,43 +85,10 @@ import ReactDOM from "react-dom";
 								};
 							};
 						}}
-						style={{
-							width: "100%",
-							boxSizing: "border-box",
-							backgroundColor: "white",
-							border: "none",
-							outline: "none",
-							lineHeight: "1",
-							fontSize: "1em",
-							padding: "1.15em",
-							borderRadius: "3pt",
-							color: "black"
-						}}
 					/>
-					<div
-						style={{
-							maxHeight: "16em",
-							overflowY: "scroll",
-							overscrollBehavior: "contain"
-						}}
-					>
+					<div id="results">
 						{results.map((result, i) => (
-							<a
-								href={result.path}
-								style={{
-									textDecoration: "none",
-									display: "block",
-									width: "100%",
-									padding: "0.5em",
-									borderBottom:
-										i - 1 === results.length ? "1px solid grey" : "none",
-									fontSize: "0.85em",
-									color: "grey",
-									boxSizing: "border-box",
-									paddingRight: "1.15em",
-									paddingLeft: "1.15em"
-								}}
-							>
+							<a href={result.path}>
 								<span
 									style={{
 										display: "block",
@@ -158,5 +110,67 @@ import ReactDOM from "react-dom";
 		};
 
 		ReactDOM.render(<SearchUI />, root);
+
+		const style = document.createElement("style");
+		shadow.appendChild(style);
+		const css = String.raw;
+		style.textContent = css`
+			a {
+				text-decoration: none;
+				display: block;
+				width: 100%;
+				padding: 0.5em;
+				border-bottom: 1px solid grey;
+				font-size: 0.85em;
+				color: grey;
+				box-sizing: border-box;
+				padding-right: 1.15em;
+				padding-left: 1.15em;
+				outline: none;
+			}
+
+			a:last-child {
+				border-bottom: none;
+			}
+
+			a:focus,
+			a:hover {
+				background-color: #efefff;
+			}
+
+			#container {
+				font-size: 14px;
+				position: fixed;
+				width: 35em;
+				left: 50vw;
+				transform: translateX(-50%);
+				top: 0;
+				z-index: 10000;
+				box-sizing: border-box;
+				border-radius: 3pt;
+				box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+				overflow: hidden;
+				background-color: #f7f7f7;
+			}
+
+			#results {
+				max-height: 16em;
+				overflow-y: scroll;
+				overscroll-behavior: contain;
+			}
+
+			input {
+				width: 100%;
+				box-sizing: border-box;
+				background-color: white;
+				border: none;
+				outline: none;
+				line-height: 1;
+				font-size: 1em;
+				padding: 1.15em;
+				border-radius: 3pt;
+				color: black;
+			}
+		`;
 	})();
 })();
