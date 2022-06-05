@@ -120,7 +120,7 @@ import ReactDOM from "react-dom";
 				display: block;
 				width: 100%;
 				padding: 0.5em;
-				border-bottom: 1px solid grey;
+				border-bottom: 1px solid #d0d0d0;
 				font-size: 0.85em;
 				color: grey;
 				box-sizing: border-box;
@@ -133,9 +133,12 @@ import ReactDOM from "react-dom";
 				border-bottom: none;
 			}
 
-			a:focus,
-			a:hover {
+			a:focus {
 				background-color: #efefff;
+			}
+
+			a:hover {
+				background-color: #e8e8ff;
 			}
 
 			#container {
