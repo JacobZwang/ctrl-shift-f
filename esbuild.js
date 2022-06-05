@@ -9,14 +9,14 @@ esbuild
 		minify: true
 	})
 	.then(() => {
-		if (fs.existsSync("./bundle")) {
-			fs.rmSync("./bundle", {
+		if (fs.existsSync("./ctrl-shift-f-bundle")) {
+			fs.rmSync("./ctrl-shift-f-bundle", {
 				recursive: true
 			});
 		}
 
-		fs.mkdirSync("./bundle", {});
-		fs.copyFileSync("./index.js", "./bundle/index.js");
-		fs.copyFileSync("./popup.html", "./bundle/popup.js");
-		fs.copyFileSync("./manifest.json", "./bundle/manifest.json");
+		fs.mkdirSync("./ctrl-shift-f-bundle", {});
+		fs.copyFileSync("./index.js", "./ctrl-shift-f-bundle/index.js");
+		fs.copyFileSync("./popup.html", "./ctrl-shift-f-bundle/popup.js");
+		fs.copyFileSync("./manifest.json", "./ctrl-shift-f-bundle/manifest.json");
 	});

@@ -19,7 +19,7 @@ jobs:
           pnpm run build
       - uses: montudor/action-zip@v1
         with:
-          args: zip -qq -r release.zip bundle
+          args: zip -qq -r ctrl-shift-f-bundle.zip ctrl-shift-f-bundle
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
@@ -28,4 +28,4 @@ jobs:
           prerelease: true
           title: "Development Build"
           files: |
-            release.zip
+            ctrl-shift-f-bundle.zip
