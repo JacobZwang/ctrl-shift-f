@@ -48,6 +48,7 @@ import ReactDOM from "react-dom";
 			return (
 				<div
 					style={{
+						fontSize: "14px",
 						position: "fixed",
 						width: "30em",
 						left: "50vw",
@@ -106,6 +107,7 @@ import ReactDOM from "react-dom";
 							border: "none",
 							outline: "none",
 							lineHeight: "1",
+							fontSize: "1em",
 							padding: "1.15em",
 							borderRadius: "3pt",
 							color: "black"
