@@ -24,8 +24,3 @@ jobs:
           automatic_release_tag: "latest"
           prerelease: true
           title: "Development Build"
-          files: |
-            index.js
-            index.html
-            popup.html
-            manifest.json
