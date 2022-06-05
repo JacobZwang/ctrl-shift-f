@@ -58,8 +58,9 @@ import ReactDOM from "react-dom";
 						controlDown = true;
 					} else if (e.key === "Shift") {
 						shiftDown = true;
-					} else if (e.key === "f") {
+					} else if (e.key === "f" || e.key === "F") {
 						if (controlDown && shiftDown) {
+							e.preventDefault();
 							setOpen(true);
 							setInputFocus();
 						}
