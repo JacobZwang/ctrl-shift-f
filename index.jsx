@@ -247,6 +247,7 @@ import ReactDOM from "react-dom";
 				padding-right: 1.15em;
 				padding-left: 1.15em;
 				outline: none;
+				text-align: left;
 			}
 
 			a:last-child {
