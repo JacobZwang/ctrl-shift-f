@@ -4,7 +4,8 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"build": "node ./esbuild.js"
+		"build": "node ./esbuild.js",
+		"build:pages": "node ./esbuild.js && cp ./index.js ./gh-pages/index.js"
 	},
 	"keywords": [],
 	"author": "",
