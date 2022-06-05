@@ -193,8 +193,9 @@ import ReactDOM from "react-dom";
 						{results.map((result, i) => (
 							<a
 								href={result.path}
-								onFocus={() => {
+								onFocus={(e) => {
 									setActiveIndex(i + 1);
+									e.target.scrollIntoView(true);
 								}}
 							>
 								<span
@@ -255,6 +256,7 @@ import ReactDOM from "react-dom";
 				padding-left: 1.15em;
 				outline: none;
 				text-align: left;
+				transition: background-color 0ms;
 			}
 
 			a:last-child {
