@@ -107,12 +107,13 @@ import ReactDOM from "react-dom";
 							outline: "none",
 							lineHeight: "1",
 							padding: "1.15em",
-							borderRadius: "3pt"
+							borderRadius: "3pt",
+							color: "black"
 						}}
 					/>
 					<div
 						style={{
-							maxHeight: "8em",
+							maxHeight: "16em",
 							overflowY: "scroll",
 							overscrollBehavior: "contain"
 						}}
@@ -127,7 +128,7 @@ import ReactDOM from "react-dom";
 									padding: "0.5em",
 									borderBottom:
 										i - 1 === results.length ? "1px solid grey" : "none",
-									fontSize: "0.75em",
+									fontSize: "0.85em",
 									color: "grey",
 									boxSizing: "border-box",
 									paddingRight: "1.15em",
