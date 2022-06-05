@@ -17,6 +17,6 @@ esbuild
 
 		fs.mkdirSync("./ctrl-shift-f-bundle", {});
 		fs.copyFileSync("./index.js", "./ctrl-shift-f-bundle/index.js");
-		fs.copyFileSync("./popup.html", "./ctrl-shift-f-bundle/popup.js");
+		fs.copyFileSync("./popup.html", "./ctrl-shift-f-bundle/popup.html");
 		fs.copyFileSync("./manifest.json", "./ctrl-shift-f-bundle/manifest.json");
 	});
