@@ -58,6 +58,7 @@ import ReactDOM from "react-dom";
 					} else if (e.key === "f") {
 						if (controlDown && shiftDown) {
 							setOpen(true);
+							setInputFocus();
 						}
 					} else if (e.key === "Escape") {
 						setOpen(false);
@@ -80,6 +81,16 @@ import ReactDOM from "react-dom";
 				};
 			}, []);
 
+			const useFocus = () => {
+				const htmlElRef = React.useRef(null);
+				const setFocus = () => {
+					htmlElRef.current && htmlElRef.current.focus();
+				};
+
+				return [htmlElRef, setFocus];
+			};
+			const [inputRef, setInputFocus] = useFocus();
+
 			return (
 				<div
 					id="container"
@@ -89,6 +100,7 @@ import ReactDOM from "react-dom";
 				>
 					<div id="controller">
 						<input
+							ref={inputRef}
 							onInput={(e) => {
 								search = e.target.value;
 								results = [];
