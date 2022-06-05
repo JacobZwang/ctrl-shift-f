@@ -64,19 +64,21 @@ import ReactDOM from "react-dom";
 					<input
 						onInput={(e) => {
 							search = e.target.value;
-							setResults([]);
-							if (search.length < 1) return;
+							results = [];
+							if (search.length < 1) {
+								setResults([]);
+								return;
+							}
 
 							const req = window.indexedDB.open("cache-search", 3);
 							req.onsuccess = (event) => {
 								const db = event.target.result;
 								const transaction = db.transaction(["pages"], "readwrite");
 								const store = transaction.objectStore("pages");
-								results = [];
-								setResults([]);
 								store.openCursor().onsuccess = (event) => {
 									const cursor = event.target.result;
-									setResults([
+
+									results = [
 										...results,
 										...Array.from(
 											cursor.value.text.matchAll(new RegExp(search, "gi"))
@@ -91,7 +93,9 @@ import ReactDOM from "react-dom";
 												match.index + search.length + 50
 											)
 										}))
-									]);
+									];
+									setResults(results);
+									cursor.continue();
 								};
 							};
 						}}
@@ -109,10 +113,11 @@ import ReactDOM from "react-dom";
 					<div
 						style={{
 							maxHeight: "8em",
-							overflowY: "scroll"
+							overflowY: "scroll",
+							overscrollBehavior: "contain"
 						}}
 					>
-						{results.map((result) => (
+						{results.map((result, i) => (
 							<a
 								href={result.path}
 								style={{
@@ -120,7 +125,8 @@ import ReactDOM from "react-dom";
 									display: "block",
 									width: "100%",
 									padding: "0.5em",
-									borderBottom: "1px solid grey",
+									borderBottom:
+										i - 1 === results.length ? "1px solid grey" : "none",
 									fontSize: "0.75em",
 									color: "grey",
 									boxSizing: "border-box",
