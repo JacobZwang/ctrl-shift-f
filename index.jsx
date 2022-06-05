@@ -265,12 +265,12 @@ import ReactDOM from "react-dom";
 				border-bottom: none;
 			}
 
-			a:focus {
-				background-color: #efefff;
+			a:hover {
+				background-color: #f5f5ff;
 			}
 
-			a:hover {
-				background-color: #e8e8ff;
+			a:focus {
+				background-color: #efefff;
 			}
 
 			#container {
