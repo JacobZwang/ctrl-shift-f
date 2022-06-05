@@ -1,0 +1,29 @@
+name: "pre-release"
+on:
+  push:
+    branches:
+      - "master"
+jobs:
+  pre-release:
+    name: "Pre Release"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      # ...
+      - name: "Build & test"
+        run: |
+          npm i -g pnpm
+          pnpm i
+          pnpm run build
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Build"
+          files: |
+            index.js
+            index.html
+            popup.html
+            manifest.json
