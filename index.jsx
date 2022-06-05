@@ -110,6 +110,7 @@ import ReactDOM from "react-dom";
 								e.target.select();
 							}}
 							onKeyDown={(e) => {
+								if (!open) return;
 								if (e.key === "Escape") setOpen(false);
 								e.stopPropagation();
 							}}
