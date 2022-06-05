@@ -62,6 +62,7 @@ import ReactDOM from "react-dom";
 					<input
 						onInput={(e) => {
 							search = e.target.value;
+							setResults([]);
 							if (search.length < 1) return;
 
 							const req = window.indexedDB.open("cache-search", 3);
