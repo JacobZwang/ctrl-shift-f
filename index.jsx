@@ -109,6 +109,10 @@ import ReactDOM from "react-dom";
 								setActiveIndex(0);
 								e.target.select();
 							}}
+							onKeyDown={(e) => {
+								if (e.key === "Escape") setOpen(false);
+								e.stopPropagation();
+							}}
 							onInput={(e) => {
 								search = e.target.value;
 								results = [];
